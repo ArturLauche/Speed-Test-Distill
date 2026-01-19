@@ -483,6 +483,10 @@ Many useful browser extensions are out there that we all know and love. But some
 
 **No client-side software or plugin is required. You can run a network speed test from any device with a [Web Browser that is IE10 or newer.](https://www.youtube.com/watch?v=9f-OM_WQ7Bw&list=PLt-deStxFJOMEAs2O1lJhscMNzcg9E3Po&index=1)**
 
+## Build an Android APK
+
+If you need an Android APK for offline/local installs, see the build scripts and prerequisites in [BUILD_ANDROID.md](BUILD_ANDROID.md).
+
 - Like this Project? Please **Donate NOW & Keep us Alive** -> https://go.openspeedtest.com/Donate
 
 MIT License
