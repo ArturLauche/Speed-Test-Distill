@@ -22,6 +22,8 @@
   <meta name="theme-color" content="#ffffff">
 </head>
 <body>
+  <div class="app-shell">
+    <div class="app-card">
   <script type="text/javascript">
     
      // Add or Remove Server --> Automatically choose the one with the least latency
@@ -122,13 +124,33 @@ function ostOnload() {
     <div class="bounce3"></div>
   </div>
   <object style="visibility:hidden" id="OpenSpeedTest-UI" data="assets/images/app.svg" type="image/svg+xml"></object>
+
+  <section class="network-insights" aria-live="polite">
+    <h2>Network Quality</h2>
+    <div class="insight-grid">
+      <article class="insight-item">
+        <span class="insight-label">Bufferbloat</span>
+        <span id="bufferbloat-score" class="insight-value">-- ms</span>
+      </article>
+      <article class="insight-item">
+        <span class="insight-label">Grade</span>
+        <span id="bufferbloat-grade" class="insight-value">--</span>
+      </article>
+      <article class="insight-item insight-item-wide">
+        <span class="insight-label">Interpretation</span>
+        <span id="bufferbloat-note" class="insight-note">Run a speed test to measure latency increase under load.</span>
+      </article>
+    </div>
+  </section>
  
   <div class="Credits">
     <a href="https://leunos.com">SpeedTest by Leunos</a> is provided by us, so you could give a <a href="https://web.leunos.com">visit</a> to us.
     <p style="font-size: 12px;"> We do not store user data. All Rights Reserved.</p>
 </div>
+  </div>
+  </div>
   
-  <script src="assets/js/app-2.5.4.min.js"></script>
+  <script src="assets/js/app-2.5.4.js"></script>
   <script src="assets/js/darkmode.js"></script>
 
 </body>

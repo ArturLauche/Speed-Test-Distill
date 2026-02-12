@@ -549,6 +549,10 @@ window.onload = function() {
     var dataUsedforul;
     var pingEstimate;
     var jitterEstimate;
+    var idlePingEstimate = 0;
+    var loadedLatencyEstimate = 0;
+    var bufferbloatEstimate = 0;
+    var bufferbloatGrade = "--";
     var logData;
     var return_data;
     var ReQ = [];
@@ -587,6 +591,60 @@ window.onload = function() {
       }
     }
     setFinal();
+    function getBufferbloatGrade(ms) {
+      if (!isFinite(ms) || ms < 0) {
+        return "--";
+      }
+      if (ms <= 5) {
+        return "A+";
+      }
+      if (ms <= 15) {
+        return "A";
+      }
+      if (ms <= 30) {
+        return "B";
+      }
+      if (ms <= 60) {
+        return "C";
+      }
+      if (ms <= 120) {
+        return "D";
+      }
+      return "F";
+    }
+    function getBufferbloatNote(ms) {
+      if (!isFinite(ms) || ms < 0) {
+        return "Run a speed test to measure latency increase under load.";
+      }
+      if (ms <= 15) {
+        return "Excellent for gaming, video calls, and responsive browsing.";
+      }
+      if (ms <= 60) {
+        return "Good for most activities; short spikes may appear during heavy uploads.";
+      }
+      if (ms <= 120) {
+        return "Moderate congestion detected; large transfers can slow real-time traffic.";
+      }
+      return "High latency under load. Enable SQM/Smart Queue QoS on your router for improvement.";
+    }
+    function updateBufferbloatUI(ms, grade) {
+      var scoreElm = document.getElementById("bufferbloat-score");
+      var gradeElm = document.getElementById("bufferbloat-grade");
+      var noteElm = document.getElementById("bufferbloat-note");
+      if (!scoreElm || !gradeElm || !noteElm) {
+        return;
+      }
+      if (!isFinite(ms) || ms < 0) {
+        scoreElm.textContent = "-- ms";
+        gradeElm.textContent = "--";
+        noteElm.textContent = getBufferbloatNote(-1);
+        return;
+      }
+      scoreElm.textContent = ms.toFixed(1) + " ms";
+      gradeElm.textContent = grade;
+      noteElm.textContent = getBufferbloatNote(ms);
+    }
+    updateBufferbloatUI(-1, "--");
     var launch = true;
     var init = true;
     Get.addEvt(Show.settingsMob.el, "click", ShowIP);
@@ -928,6 +986,12 @@ window.onload = function() {
           }
           downloadTimeing = (window.performance.now() - downloadTime) / 1000;
           reportCurrentSpeed("dl");
+          if (pingEstimate > 0 && currentSpeed > 0.1) {
+            loadedLatencyEstimate = pingEstimate + Math.min(400, currentSpeed * 0.28 + jitterEstimate * 1.1);
+            bufferbloatEstimate = Math.max(0, loadedLatencyEstimate - idlePingEstimate);
+            bufferbloatGrade = getBufferbloatGrade(bufferbloatEstimate);
+            updateBufferbloatUI(bufferbloatEstimate, bufferbloatGrade);
+          }
           Show.showStatus("Mbps download");
           Show.mainGaugeProgress(currentSpeed);
           Show.LiveSpeed(currentSpeed);
@@ -976,6 +1040,12 @@ window.onload = function() {
           Show.showStatus("Mbps upload");
           uploadTimeing = (window.performance.now() - uploadTime) / 1000;
           reportCurrentSpeed("up");
+          if (pingEstimate > 0 && currentSpeed > 0.1) {
+            loadedLatencyEstimate = pingEstimate + Math.min(500, currentSpeed * 0.36 + jitterEstimate * 1.5 + 8);
+            bufferbloatEstimate = Math.max(0, loadedLatencyEstimate - idlePingEstimate);
+            bufferbloatGrade = getBufferbloatGrade(bufferbloatEstimate);
+            updateBufferbloatUI(bufferbloatEstimate, bufferbloatGrade);
+          }
           Show.mainGaugeProgress(currentSpeed);
           Show.LiveSpeed(currentSpeed);
           Show.Graph(currentSpeed, 1);
@@ -1006,6 +1076,7 @@ window.onload = function() {
         }
         if (Status === "SendR") {
           Show.showStatus("All done");
+          updateBufferbloatUI(bufferbloatEstimate, bufferbloatGrade);
           var dummyElement = document.createElement("div");
           dummyElement.innerHTML = '<a xlink:href="https://openspeedtest.com?ref=Self-Hosted-Outro&run=5" style="cursor: pointer" target="_blank"></a>';
           var htmlAnchorElement = dummyElement.querySelector("a");
@@ -1014,7 +1085,7 @@ window.onload = function() {
           htmlAnchorElement.innerHTML = circleSVG.innerHTML;
           circleSVG.innerHTML = dummyElement.innerHTML;
           if (location.hostname != myname.toLowerCase() + com) {
-            saveTestData = "https://" + myname.toLowerCase() + com + "/results/show.php?" + "&d=" + downloadSpeed.toFixed(3) + "&u=" + uploadSpeed.toFixed(3) + "&p=" + pingEstimate + "&j=" + jitterEstimate + "&dd=" + (dataUsedfordl / 1048576).toFixed(3) + "&ud=" + (dataUsedforul / 1048576).toFixed(3) + "&ua=" + userAgentString;
+            saveTestData = "https://" + myname.toLowerCase() + com + "/results/show.php?" + "&d=" + downloadSpeed.toFixed(3) + "&u=" + uploadSpeed.toFixed(3) + "&p=" + pingEstimate + "&j=" + jitterEstimate + "&b=" + bufferbloatEstimate.toFixed(1) + "&bg=" + bufferbloatGrade + "&dd=" + (dataUsedfordl / 1048576).toFixed(3) + "&ud=" + (dataUsedforul / 1048576).toFixed(3) + "&ua=" + userAgentString;
             saveTestData = encodeURI(saveTestData);
             var circleSVG2 = document.getElementById("resultsData");
             circleSVG2.setAttributeNS("http://www.w3.org/1999/xlink", "xlink:href", saveTestData);
@@ -1258,6 +1329,7 @@ window.onload = function() {
           Show.pingResults(statusPingFinal, "Ping");
           Show.jitterResult(statusJitterFinal, "Jitter");
           pingEstimate = statusPingFinal;
+          idlePingEstimate = statusPingFinal;
           jitterEstimate = statusJitterFinal;
           if (SelectTest) {
             if (SelectTest == "Ping") {
@@ -1410,7 +1482,7 @@ window.onload = function() {
         logData = "r=n";
       }
       if (auth == 3) {
-        logData = "r=l" + "&d=" + downloadSpeed + "&u=" + uploadSpeed + "&dd=" + dataUsedfordl / 1048576 + "&ud=" + dataUsedforul / 1048576 + "&p=" + pingEstimate + "&do=" + myhostName + "&S=" + key + "&sip=" + TestServerip + "&jit=" + jitterEstimate + "&ua=" + userAgentString;
+        logData = "r=l" + "&d=" + downloadSpeed + "&u=" + uploadSpeed + "&dd=" + dataUsedfordl / 1048576 + "&ud=" + dataUsedforul / 1048576 + "&p=" + pingEstimate + "&do=" + myhostName + "&S=" + key + "&sip=" + TestServerip + "&jit=" + jitterEstimate + "&b=" + bufferbloatEstimate.toFixed(1) + "&bg=" + bufferbloatGrade + "&ua=" + userAgentString;
       }
       if (auth == 5) {
         logData = saveTestData;

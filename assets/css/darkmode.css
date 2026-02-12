@@ -43,3 +43,32 @@ body {
 .ConnectError {
   fill: #ffffff;
 }
+
+
+.app-card {
+  background: rgba(17, 17, 19, 0.9);
+  box-shadow: 0 24px 56px rgba(0, 0, 0, 0.45);
+}
+
+.network-insights {
+  border-color: rgba(86, 196, 251, 0.25);
+  background: linear-gradient(135deg, rgba(86, 196, 251, 0.12), rgba(86, 196, 251, 0.03));
+  color: #d9ecff;
+}
+
+.insight-item {
+  background: rgba(7, 7, 7, 0.55);
+  border-color: rgba(86, 196, 251, 0.25);
+}
+
+.insight-label {
+  color: #8ebee6;
+}
+
+.insight-value {
+  color: #f4fbff;
+}
+
+.insight-note {
+  color: #c6e4ff;
+}
