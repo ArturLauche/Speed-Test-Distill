@@ -4,22 +4,37 @@
       <meta charset="UTF-8">
       <meta http-equiv="X-UA-Compatible" content="IE=edge">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <title>Speedtest by Leunos</title>
+      <title>Leunos Speed Test Embed</title>
       <style>
          ::-webkit-scrollbar {
          display: none;
          }
          html {
-         -ms-overflow-style: none; 
+         -ms-overflow-style: none;
          scrollbar-width: none;
          }
-         body{margin: 0px;}
+         body {
+         margin: 0;
+         font-family: system-ui, -apple-system, Segoe UI, sans-serif;
+         background: #0f172a;
+         color: #e2e8f0;
+         }
+         .embed-note {
+         text-align: center;
+         font-size: 13px;
+         padding: 8px;
+         background: #020617;
+         }
+         .embed-note a {
+         color: #38bdf8;
+         text-decoration: none;
+         }
       </style>
    </head>
    <body>
-      <iframe id="OST-iFrame" src="//openspeedtest.com/selfhosted" style="width: 100vw;height: 100vh;" frameborder="0" allowfullscreen></iframe>
-      <div style="text-align: center; color: rgb(125 119 119); font-size:14px; ">
-         <a href="https://openspeedtest.com?ref=Self-Hosted-Widget&Run"  style="text-decoration:none;  color: rgb(125 119 119);"">Speed Test</a> by Leunos
+      <iframe id="speedtest-frame" src="./index.html" style="width: 100vw;height: calc(100vh - 34px);border:0;" title="Leunos Speed Test" allowfullscreen></iframe>
+      <div class="embed-note">
+         Embedded locally from this project. Powered by <a href="https://leunos.com">Leunos</a>.
       </div>
    </body>
 </html>
