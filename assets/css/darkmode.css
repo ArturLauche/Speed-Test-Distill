@@ -43,3 +43,33 @@ body {
 .ConnectError {
   fill: #ffffff;
 }
+
+
+.app-header {
+  background: rgba(15, 23, 42, 0.68);
+  border-color: rgba(71, 85, 105, 0.55);
+  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.45);
+}
+
+.eyebrow {
+  color: #38bdf8;
+}
+
+.app-header h1 {
+  color: #f8fafc;
+}
+
+.subhead,
+.Credits {
+  color: #cbd5e1;
+}
+
+.credit-brand {
+  color: #f8fafc;
+}
+
+.Credits {
+  background: rgba(2, 6, 23, 0.82);
+  border-color: rgba(51, 65, 85, 0.85);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.45);
+}
