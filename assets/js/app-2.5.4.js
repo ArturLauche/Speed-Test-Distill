@@ -97,7 +97,7 @@ window.onload = function() {
     this.graphMob2 = _("graphMob2");
     this.graphMob1 = _("graphMob1");
     this.text = _("text");
-    this.scale = [{degree:680, value:0}, {degree:570, value:0.5}, {degree:460, value:1}, {degree:337, value:10}, {degree:220, value:100}, {degree:115, value:500}, {degree:0, value:1000},];
+    this.scale = [{degree:680, value:0}, {degree:570, value:0.5}, {degree:460, value:1}, {degree:337, value:10}, {degree:220, value:100}, {degree:130, value:500}, {degree:85, value:1000}, {degree:42, value:2500}, {degree:14, value:5000}, {degree:0, value:10000},];
     this.element = "";
     this.chart = "";
     this.polygon = "";
@@ -293,7 +293,7 @@ window.onload = function() {
       this.mainGaugeBlue_Mob.el.style.strokeDashoffset = mainGaugeOffset;
       this.mainGaugeWhite_Mob.el.style.strokeDashoffset = mainGaugeOffset == 0 ? 1 : mainGaugeOffset + 1;
     }
-    if (mainGaugeOffset == 0 && speed > 1000) {
+    if (mainGaugeOffset == 0 && speed > 10000) {
       this.mainGaugeBlue_Mob.el.style.strokeDashoffset = mainGaugeOffset >= 681 ? 681 : mainGaugeOffset;
       this.mainGaugeWhite_Mob.el.style.strokeDashoffset = mainGaugeOffset == 0 ? 1 : mainGaugeOffset + 1;
       this.mainGaugeWhite_Desk.el.style.strokeDashoffset = mainGaugeOffset == 0 ? 1 : mainGaugeOffset + 1;
@@ -398,7 +398,7 @@ window.onload = function() {
         ShowData = 0;
       }
       this.oDoLiveSpeed.el.textContent = ShowData;
-      this.oDoTopSpeed.el.textContent = "1000+";
+      this.oDoTopSpeed.el.textContent = "10000+";
       this.oDoTopSpeed.el.style.fontSize = "16.9px";
       this.oDoTopSpeed.el.style.fill = "gray";
       return;
@@ -425,13 +425,13 @@ window.onload = function() {
         var speed = ShowData.toFixed(1);
         this.oDoLiveSpeed.el.textContent = speed;
       }
-      if (ShowData <= 1000) {
-        this.oDoTopSpeed.el.textContent = "1000+";
+      if (ShowData <= 10000) {
+        this.oDoTopSpeed.el.textContent = "10000+";
         this.oDoTopSpeed.el.style.fontSize = "16.9px";
         this.oDoTopSpeed.el.style.fill = "gray";
       }
-      if (ShowData >= 1010) {
-        this.oDoTopSpeed.el.textContent = Math.floor(ShowData / 1010) * 1000 + "+";
+      if (ShowData >= 10000) {
+        this.oDoTopSpeed.el.textContent = Math.floor(ShowData / 10000) * 10000 + "+";
         this.oDoTopSpeed.el.style.fill = "gray";
         this.oDoTopSpeed.el.style.fontSize = "17.2px";
       }
