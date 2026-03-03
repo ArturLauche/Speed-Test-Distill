@@ -861,7 +861,7 @@ window.onload = function() {
     var osttm = "\u2122";
     var myname = "Leunos Speed Test";
     var com = "";
-    var ost = myname + osttm;
+    var ost = "Leunos";
     function hiEnter(e) {
       if (e.key === "Enter") {
         runTasks();
