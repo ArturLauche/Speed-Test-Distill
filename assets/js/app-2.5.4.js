@@ -859,8 +859,8 @@ window.onload = function() {
       }
     }
     var osttm = "\u2122";
-    var myname = "OpenSpeedTest";
-    var com = ".com";
+    var myname = "Leunos Speed Test";
+    var com = "";
     var ost = myname + osttm;
     function hiEnter(e) {
       if (e.key === "Enter") {
@@ -997,7 +997,7 @@ window.onload = function() {
           Status = "busy";
           clearInterval(Engine);
           var dummyElement = document.createElement("div");
-          dummyElement.innerHTML = '<a xlink:href="https://openspeedtest.com/FAQ.php?ref=NetworkError" style="cursor: pointer" target="_blank"></a>';
+          dummyElement.innerHTML = '<a xlink:href="javascript:void(0)" style="cursor: pointer" target="_blank"></a>';
           var htmlAnchorElement = dummyElement.querySelector("a");
           Show.oDoLiveSpeed.el.textContent = "Network Error";
           var circleSVG = document.getElementById("oDoLiveSpeed");
@@ -1007,13 +1007,13 @@ window.onload = function() {
         if (Status === "SendR") {
           Show.showStatus("All done");
           var dummyElement = document.createElement("div");
-          dummyElement.innerHTML = '<a xlink:href="https://openspeedtest.com?ref=Self-Hosted-Outro&run=5" style="cursor: pointer" target="_blank"></a>';
+          dummyElement.innerHTML = '<a xlink:href="javascript:void(0)" style="cursor: pointer" target="_blank"></a>';
           var htmlAnchorElement = dummyElement.querySelector("a");
           Show.oDoLiveSpeed.el.textContent = ost;
           var circleSVG = document.getElementById("oDoLiveSpeed");
           htmlAnchorElement.innerHTML = circleSVG.innerHTML;
           circleSVG.innerHTML = dummyElement.innerHTML;
-          if (location.hostname != myname.toLowerCase() + com) {
+          if (false) {
             saveTestData = "https://" + myname.toLowerCase() + com + "/results/show.php?" + "&d=" + downloadSpeed.toFixed(3) + "&u=" + uploadSpeed.toFixed(3) + "&p=" + pingEstimate + "&j=" + jitterEstimate + "&dd=" + (dataUsedfordl / 1048576).toFixed(3) + "&ud=" + (dataUsedforul / 1048576).toFixed(3) + "&ua=" + userAgentString;
             saveTestData = encodeURI(saveTestData);
             var circleSVG2 = document.getElementById("resultsData");
