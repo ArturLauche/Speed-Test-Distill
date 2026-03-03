@@ -78,6 +78,22 @@ color: #14b0fe;
   display: none;
   overflow: hidden;
 }
+.logoText {
+  font-size: 14px;
+  letter-spacing: .2px;
+  fill: #4d4d4d;
+  font-family: Roboto-Medium, Roboto;
+  font-weight: 500;
+}
+.logoIconStroke {
+  fill: none;
+  stroke: #3da6ff;
+  stroke-width: 2.4;
+  stroke-linecap: round;
+}
+.logoIconFill {
+  fill: #3da6ff;
+}
 .main-Gaugebg {
   fill: none;
   stroke: rgb(231, 231, 232);
