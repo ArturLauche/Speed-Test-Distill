@@ -4,10 +4,10 @@
     class="openSpeedtestApp">
 	<symbol id="logo" viewBox="0 0 262.79 50.38">
 		<g>
-			<circle cx="24" cy="25" r="12" style="fill:none;stroke:#3da6ff;stroke-width:3.2" />
-			<path d="M24 25 L30 19" style="fill:none;stroke:#3da6ff;stroke-width:2.4;stroke-linecap:round" />
-			<circle cx="24" cy="25" r="2.2" style="fill:#3da6ff" />
-			<text x="42" y="31" style="font-family:Roboto, Arial, sans-serif;font-size:14px;letter-spacing:.2px;fill:#4d4d4d;font-weight:500">Leunos Speed Test</text>
+			<circle class="logoIconStroke" cx="24" cy="25" r="12" />
+			<path class="logoIconStroke" d="M24 25 L30 19" />
+			<circle class="logoIconFill" cx="24" cy="25" r="2.2" />
+			<text class="logoText" x="42" y="31">Leunos Speed Test</text>
 		</g>
 		<title>Leunos Speed Test</title>
 	</symbol>
